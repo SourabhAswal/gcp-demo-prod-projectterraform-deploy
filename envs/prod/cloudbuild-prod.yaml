@@ -1,0 +1,34 @@
+steps:
+  # Stage 1: Terraform Init
+  - name: "hashicorp/terraform"
+    id: "Terraform Init"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        cd terraform-gcp-project
+        terraform init -backend-config="bucket=realcoderzai-tfstate"
+
+  # Stage 2: Terraform Plan
+  - name: "hashicorp/terraform"
+    id: "Terraform Plan"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        cd terraform-gcp-project
+        terraform plan -var-file=envs/prod/terraform.tfvars -out=tfplan
+
+  # Stage 3: Terraform Apply
+  - name: "hashicorp/terraform"
+    id: "Terraform Apply"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        cd terraform-gcp-project
+        terraform apply -auto-approve tfplan
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY
