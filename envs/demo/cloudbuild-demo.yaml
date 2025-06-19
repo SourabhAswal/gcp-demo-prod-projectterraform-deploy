@@ -29,6 +29,6 @@ steps:
         cd terraform-gcp-project
         terraform apply -auto-approve tfplan
 
-
+#Logging in Cloud Build
 options:
   logging: CLOUD_LOGGING_ONLY
