@@ -30,5 +30,16 @@ steps:
         terraform apply -auto-approve tfplan
 
 
+   # Stage 4: Terraform Destroy
+  - name: "hashicorp/terraform"
+    id: "Terraform Destroy"
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        cd terraform-gcp-project
+        terraform destroy -var-file=envs/prod/terraform.tfvars -auto-approve      
+
+
 options:
   logging: CLOUD_LOGGING_ONLY
