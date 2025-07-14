@@ -1,5 +1,5 @@
 steps:
-  # Stage 1: Terraform Init
+  # Stage 1: Terraform Init initialise
   - name: "hashicorp/terraform"
     id: "Terraform Init"
     entrypoint: "sh"
